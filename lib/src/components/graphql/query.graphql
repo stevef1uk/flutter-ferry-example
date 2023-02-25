@@ -1,0 +1,8 @@
+query MyQuery {
+  cb1_individual {
+    id
+    name
+    email
+  }
+}
+
