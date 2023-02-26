@@ -1,8 +1,7 @@
-query MyQuery {
-  cb1_individual {
+query MyQuery($i_id: Int!) {
+  cb1_individual(where: {id: {_eq: $i_id}}) {
     id
     name
     email
   }
 }
-

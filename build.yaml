@@ -1,6 +1,10 @@
 targets:
   $default:
     builders:
+      gql_build|data_builder:
+        enabled: true
+        options:
+          schema: test1|lib/schema.graphql
       ferry_generator|graphql_builder:
         enabled: true
         options:
@@ -9,4 +13,7 @@ targets:
         enabled: true
         options:
           schema: test1|lib/schema.graphql
-
+      ferry_generator|req_builder:
+        enabled: true
+        options:
+          schema: test1|lib/schema.graphql

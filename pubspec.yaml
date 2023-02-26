@@ -33,6 +33,7 @@ dependencies:
   hive: #[latest-version]
   ferry_hive_store: #[latest-version]
   hive_flutter: #[latest-version]
+
   flutter:
     sdk: flutter
 

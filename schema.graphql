@@ -1,0 +1,3838 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+columns and relationships of "cb1.agreement"
+"""
+type cb1_agreement {
+  id: Int!
+  product_id: Int!
+}
+
+"""
+aggregated selection of "cb1.agreement"
+"""
+type cb1_agreement_aggregate {
+  aggregate: cb1_agreement_aggregate_fields
+  nodes: [cb1_agreement!]!
+}
+
+"""
+aggregate fields of "cb1.agreement"
+"""
+type cb1_agreement_aggregate_fields {
+  avg: cb1_agreement_avg_fields
+  count(columns: [cb1_agreement_select_column!], distinct: Boolean): Int!
+  max: cb1_agreement_max_fields
+  min: cb1_agreement_min_fields
+  stddev: cb1_agreement_stddev_fields
+  stddev_pop: cb1_agreement_stddev_pop_fields
+  stddev_samp: cb1_agreement_stddev_samp_fields
+  sum: cb1_agreement_sum_fields
+  var_pop: cb1_agreement_var_pop_fields
+  var_samp: cb1_agreement_var_samp_fields
+  variance: cb1_agreement_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_agreement_avg_fields {
+  id: Float
+  product_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.agreement". All fields are combined with a logical 'AND'.
+"""
+input cb1_agreement_bool_exp {
+  _and: [cb1_agreement_bool_exp!]
+  _not: cb1_agreement_bool_exp
+  _or: [cb1_agreement_bool_exp!]
+  id: Int_comparison_exp
+  product_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.agreement"
+"""
+enum cb1_agreement_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  agreement_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.agreement"
+"""
+input cb1_agreement_inc_input {
+  id: Int
+  product_id: Int
+}
+
+"""
+input type for inserting data into table "cb1.agreement"
+"""
+input cb1_agreement_insert_input {
+  id: Int
+  product_id: Int
+}
+
+"""aggregate max on columns"""
+type cb1_agreement_max_fields {
+  id: Int
+  product_id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_agreement_min_fields {
+  id: Int
+  product_id: Int
+}
+
+"""
+response of any mutation on the table "cb1.agreement"
+"""
+type cb1_agreement_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_agreement!]!
+}
+
+"""
+on_conflict condition type for table "cb1.agreement"
+"""
+input cb1_agreement_on_conflict {
+  constraint: cb1_agreement_constraint!
+  update_columns: [cb1_agreement_update_column!]! = []
+  where: cb1_agreement_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.agreement"."""
+input cb1_agreement_order_by {
+  id: order_by
+  product_id: order_by
+}
+
+"""primary key columns input for table: cb1.agreement"""
+input cb1_agreement_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.agreement"
+"""
+enum cb1_agreement_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  product_id
+}
+
+"""
+input type for updating data in table "cb1.agreement"
+"""
+input cb1_agreement_set_input {
+  id: Int
+  product_id: Int
+}
+
+"""aggregate stddev on columns"""
+type cb1_agreement_stddev_fields {
+  id: Float
+  product_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_agreement_stddev_pop_fields {
+  id: Float
+  product_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_agreement_stddev_samp_fields {
+  id: Float
+  product_id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_agreement"
+"""
+input cb1_agreement_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_agreement_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_agreement_stream_cursor_value_input {
+  id: Int
+  product_id: Int
+}
+
+"""aggregate sum on columns"""
+type cb1_agreement_sum_fields {
+  id: Int
+  product_id: Int
+}
+
+"""
+update columns of table "cb1.agreement"
+"""
+enum cb1_agreement_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  product_id
+}
+
+input cb1_agreement_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_agreement_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_agreement_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_agreement_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_agreement_var_pop_fields {
+  id: Float
+  product_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_agreement_var_samp_fields {
+  id: Float
+  product_id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_agreement_variance_fields {
+  id: Float
+  product_id: Float
+}
+
+"""
+columns and relationships of "cb1.authorities"
+"""
+type cb1_authorities {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int!
+  orig_party_id: Int!
+  type: name!
+}
+
+"""
+aggregated selection of "cb1.authorities"
+"""
+type cb1_authorities_aggregate {
+  aggregate: cb1_authorities_aggregate_fields
+  nodes: [cb1_authorities!]!
+}
+
+"""
+aggregate fields of "cb1.authorities"
+"""
+type cb1_authorities_aggregate_fields {
+  avg: cb1_authorities_avg_fields
+  count(columns: [cb1_authorities_select_column!], distinct: Boolean): Int!
+  max: cb1_authorities_max_fields
+  min: cb1_authorities_min_fields
+  stddev: cb1_authorities_stddev_fields
+  stddev_pop: cb1_authorities_stddev_pop_fields
+  stddev_samp: cb1_authorities_stddev_samp_fields
+  sum: cb1_authorities_sum_fields
+  var_pop: cb1_authorities_var_pop_fields
+  var_samp: cb1_authorities_var_samp_fields
+  variance: cb1_authorities_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_authorities_avg_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.authorities". All fields are combined with a logical 'AND'.
+"""
+input cb1_authorities_bool_exp {
+  _and: [cb1_authorities_bool_exp!]
+  _not: cb1_authorities_bool_exp
+  _or: [cb1_authorities_bool_exp!]
+  agreement_id: Int_comparison_exp
+  dest_party_id: Int_comparison_exp
+  id: Int_comparison_exp
+  orig_party_id: Int_comparison_exp
+  type: name_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.authorities"
+"""
+enum cb1_authorities_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  authorities_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.authorities"
+"""
+input cb1_authorities_inc_input {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+}
+
+"""
+input type for inserting data into table "cb1.authorities"
+"""
+input cb1_authorities_insert_input {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+  type: name
+}
+
+"""aggregate max on columns"""
+type cb1_authorities_max_fields {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_authorities_min_fields {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+}
+
+"""
+response of any mutation on the table "cb1.authorities"
+"""
+type cb1_authorities_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_authorities!]!
+}
+
+"""
+on_conflict condition type for table "cb1.authorities"
+"""
+input cb1_authorities_on_conflict {
+  constraint: cb1_authorities_constraint!
+  update_columns: [cb1_authorities_update_column!]! = []
+  where: cb1_authorities_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.authorities"."""
+input cb1_authorities_order_by {
+  agreement_id: order_by
+  dest_party_id: order_by
+  id: order_by
+  orig_party_id: order_by
+  type: order_by
+}
+
+"""primary key columns input for table: cb1.authorities"""
+input cb1_authorities_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.authorities"
+"""
+enum cb1_authorities_select_column {
+  """column name"""
+  agreement_id
+
+  """column name"""
+  dest_party_id
+
+  """column name"""
+  id
+
+  """column name"""
+  orig_party_id
+
+  """column name"""
+  type
+}
+
+"""
+input type for updating data in table "cb1.authorities"
+"""
+input cb1_authorities_set_input {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+  type: name
+}
+
+"""aggregate stddev on columns"""
+type cb1_authorities_stddev_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_authorities_stddev_pop_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_authorities_stddev_samp_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_authorities"
+"""
+input cb1_authorities_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_authorities_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_authorities_stream_cursor_value_input {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+  type: name
+}
+
+"""aggregate sum on columns"""
+type cb1_authorities_sum_fields {
+  agreement_id: Int
+  dest_party_id: Int
+  id: Int
+  orig_party_id: Int
+}
+
+"""
+update columns of table "cb1.authorities"
+"""
+enum cb1_authorities_update_column {
+  """column name"""
+  agreement_id
+
+  """column name"""
+  dest_party_id
+
+  """column name"""
+  id
+
+  """column name"""
+  orig_party_id
+
+  """column name"""
+  type
+}
+
+input cb1_authorities_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_authorities_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_authorities_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_authorities_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_authorities_var_pop_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_authorities_var_samp_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_authorities_variance_fields {
+  agreement_id: Float
+  dest_party_id: Float
+  id: Float
+  orig_party_id: Float
+}
+
+"""
+columns and relationships of "cb1.individual"
+"""
+type cb1_individual {
+  email: String!
+  id: Int!
+  name: name!
+}
+
+"""
+aggregated selection of "cb1.individual"
+"""
+type cb1_individual_aggregate {
+  aggregate: cb1_individual_aggregate_fields
+  nodes: [cb1_individual!]!
+}
+
+"""
+aggregate fields of "cb1.individual"
+"""
+type cb1_individual_aggregate_fields {
+  avg: cb1_individual_avg_fields
+  count(columns: [cb1_individual_select_column!], distinct: Boolean): Int!
+  max: cb1_individual_max_fields
+  min: cb1_individual_min_fields
+  stddev: cb1_individual_stddev_fields
+  stddev_pop: cb1_individual_stddev_pop_fields
+  stddev_samp: cb1_individual_stddev_samp_fields
+  sum: cb1_individual_sum_fields
+  var_pop: cb1_individual_var_pop_fields
+  var_samp: cb1_individual_var_samp_fields
+  variance: cb1_individual_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_individual_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.individual". All fields are combined with a logical 'AND'.
+"""
+input cb1_individual_bool_exp {
+  _and: [cb1_individual_bool_exp!]
+  _not: cb1_individual_bool_exp
+  _or: [cb1_individual_bool_exp!]
+  email: String_comparison_exp
+  id: Int_comparison_exp
+  name: name_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.individual"
+"""
+enum cb1_individual_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  individual_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.individual"
+"""
+input cb1_individual_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "cb1.individual"
+"""
+input cb1_individual_insert_input {
+  email: String
+  id: Int
+  name: name
+}
+
+"""aggregate max on columns"""
+type cb1_individual_max_fields {
+  email: String
+  id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_individual_min_fields {
+  email: String
+  id: Int
+}
+
+"""
+response of any mutation on the table "cb1.individual"
+"""
+type cb1_individual_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_individual!]!
+}
+
+"""
+on_conflict condition type for table "cb1.individual"
+"""
+input cb1_individual_on_conflict {
+  constraint: cb1_individual_constraint!
+  update_columns: [cb1_individual_update_column!]! = []
+  where: cb1_individual_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.individual"."""
+input cb1_individual_order_by {
+  email: order_by
+  id: order_by
+  name: order_by
+}
+
+"""primary key columns input for table: cb1.individual"""
+input cb1_individual_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.individual"
+"""
+enum cb1_individual_select_column {
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+"""
+input type for updating data in table "cb1.individual"
+"""
+input cb1_individual_set_input {
+  email: String
+  id: Int
+  name: name
+}
+
+"""aggregate stddev on columns"""
+type cb1_individual_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_individual_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_individual_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_individual"
+"""
+input cb1_individual_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_individual_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_individual_stream_cursor_value_input {
+  email: String
+  id: Int
+  name: name
+}
+
+"""aggregate sum on columns"""
+type cb1_individual_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "cb1.individual"
+"""
+enum cb1_individual_update_column {
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+}
+
+input cb1_individual_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_individual_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_individual_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_individual_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_individual_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_individual_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_individual_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "cb1.join_product_permissions"
+"""
+type cb1_join_product_permissions {
+  id: Int!
+  p_a_p_id: Int!
+  permission_id: Int!
+}
+
+"""
+aggregated selection of "cb1.join_product_permissions"
+"""
+type cb1_join_product_permissions_aggregate {
+  aggregate: cb1_join_product_permissions_aggregate_fields
+  nodes: [cb1_join_product_permissions!]!
+}
+
+"""
+aggregate fields of "cb1.join_product_permissions"
+"""
+type cb1_join_product_permissions_aggregate_fields {
+  avg: cb1_join_product_permissions_avg_fields
+  count(columns: [cb1_join_product_permissions_select_column!], distinct: Boolean): Int!
+  max: cb1_join_product_permissions_max_fields
+  min: cb1_join_product_permissions_min_fields
+  stddev: cb1_join_product_permissions_stddev_fields
+  stddev_pop: cb1_join_product_permissions_stddev_pop_fields
+  stddev_samp: cb1_join_product_permissions_stddev_samp_fields
+  sum: cb1_join_product_permissions_sum_fields
+  var_pop: cb1_join_product_permissions_var_pop_fields
+  var_samp: cb1_join_product_permissions_var_samp_fields
+  variance: cb1_join_product_permissions_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_join_product_permissions_avg_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.join_product_permissions". All fields are combined with a logical 'AND'.
+"""
+input cb1_join_product_permissions_bool_exp {
+  _and: [cb1_join_product_permissions_bool_exp!]
+  _not: cb1_join_product_permissions_bool_exp
+  _or: [cb1_join_product_permissions_bool_exp!]
+  id: Int_comparison_exp
+  p_a_p_id: Int_comparison_exp
+  permission_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.join_product_permissions"
+"""
+enum cb1_join_product_permissions_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  join_product_permissions_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.join_product_permissions"
+"""
+input cb1_join_product_permissions_inc_input {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""
+input type for inserting data into table "cb1.join_product_permissions"
+"""
+input cb1_join_product_permissions_insert_input {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""aggregate max on columns"""
+type cb1_join_product_permissions_max_fields {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_join_product_permissions_min_fields {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""
+response of any mutation on the table "cb1.join_product_permissions"
+"""
+type cb1_join_product_permissions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_join_product_permissions!]!
+}
+
+"""
+on_conflict condition type for table "cb1.join_product_permissions"
+"""
+input cb1_join_product_permissions_on_conflict {
+  constraint: cb1_join_product_permissions_constraint!
+  update_columns: [cb1_join_product_permissions_update_column!]! = []
+  where: cb1_join_product_permissions_bool_exp
+}
+
+"""
+Ordering options when selecting data from "cb1.join_product_permissions".
+"""
+input cb1_join_product_permissions_order_by {
+  id: order_by
+  p_a_p_id: order_by
+  permission_id: order_by
+}
+
+"""primary key columns input for table: cb1.join_product_permissions"""
+input cb1_join_product_permissions_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.join_product_permissions"
+"""
+enum cb1_join_product_permissions_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  p_a_p_id
+
+  """column name"""
+  permission_id
+}
+
+"""
+input type for updating data in table "cb1.join_product_permissions"
+"""
+input cb1_join_product_permissions_set_input {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""aggregate stddev on columns"""
+type cb1_join_product_permissions_stddev_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_join_product_permissions_stddev_pop_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_join_product_permissions_stddev_samp_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_join_product_permissions"
+"""
+input cb1_join_product_permissions_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_join_product_permissions_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_join_product_permissions_stream_cursor_value_input {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""aggregate sum on columns"""
+type cb1_join_product_permissions_sum_fields {
+  id: Int
+  p_a_p_id: Int
+  permission_id: Int
+}
+
+"""
+update columns of table "cb1.join_product_permissions"
+"""
+enum cb1_join_product_permissions_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  p_a_p_id
+
+  """column name"""
+  permission_id
+}
+
+input cb1_join_product_permissions_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_join_product_permissions_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_join_product_permissions_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_join_product_permissions_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_join_product_permissions_var_pop_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_join_product_permissions_var_samp_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_join_product_permissions_variance_fields {
+  id: Float
+  p_a_p_id: Float
+  permission_id: Float
+}
+
+"""
+columns and relationships of "cb1.party"
+"""
+type cb1_party {
+  authority_id: Int!
+  id: Int!
+  individual_id: Int!
+}
+
+"""
+aggregated selection of "cb1.party"
+"""
+type cb1_party_aggregate {
+  aggregate: cb1_party_aggregate_fields
+  nodes: [cb1_party!]!
+}
+
+"""
+aggregate fields of "cb1.party"
+"""
+type cb1_party_aggregate_fields {
+  avg: cb1_party_avg_fields
+  count(columns: [cb1_party_select_column!], distinct: Boolean): Int!
+  max: cb1_party_max_fields
+  min: cb1_party_min_fields
+  stddev: cb1_party_stddev_fields
+  stddev_pop: cb1_party_stddev_pop_fields
+  stddev_samp: cb1_party_stddev_samp_fields
+  sum: cb1_party_sum_fields
+  var_pop: cb1_party_var_pop_fields
+  var_samp: cb1_party_var_samp_fields
+  variance: cb1_party_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_party_avg_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.party". All fields are combined with a logical 'AND'.
+"""
+input cb1_party_bool_exp {
+  _and: [cb1_party_bool_exp!]
+  _not: cb1_party_bool_exp
+  _or: [cb1_party_bool_exp!]
+  authority_id: Int_comparison_exp
+  id: Int_comparison_exp
+  individual_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.party"
+"""
+enum cb1_party_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  party_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.party"
+"""
+input cb1_party_inc_input {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""
+input type for inserting data into table "cb1.party"
+"""
+input cb1_party_insert_input {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""aggregate max on columns"""
+type cb1_party_max_fields {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_party_min_fields {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""
+response of any mutation on the table "cb1.party"
+"""
+type cb1_party_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_party!]!
+}
+
+"""
+on_conflict condition type for table "cb1.party"
+"""
+input cb1_party_on_conflict {
+  constraint: cb1_party_constraint!
+  update_columns: [cb1_party_update_column!]! = []
+  where: cb1_party_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.party"."""
+input cb1_party_order_by {
+  authority_id: order_by
+  id: order_by
+  individual_id: order_by
+}
+
+"""primary key columns input for table: cb1.party"""
+input cb1_party_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.party"
+"""
+enum cb1_party_select_column {
+  """column name"""
+  authority_id
+
+  """column name"""
+  id
+
+  """column name"""
+  individual_id
+}
+
+"""
+input type for updating data in table "cb1.party"
+"""
+input cb1_party_set_input {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""aggregate stddev on columns"""
+type cb1_party_stddev_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_party_stddev_pop_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_party_stddev_samp_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_party"
+"""
+input cb1_party_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_party_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_party_stream_cursor_value_input {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""aggregate sum on columns"""
+type cb1_party_sum_fields {
+  authority_id: Int
+  id: Int
+  individual_id: Int
+}
+
+"""
+update columns of table "cb1.party"
+"""
+enum cb1_party_update_column {
+  """column name"""
+  authority_id
+
+  """column name"""
+  id
+
+  """column name"""
+  individual_id
+}
+
+input cb1_party_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_party_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_party_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_party_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_party_var_pop_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_party_var_samp_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_party_variance_fields {
+  authority_id: Float
+  id: Float
+  individual_id: Float
+}
+
+"""
+columns and relationships of "cb1.permissions"
+"""
+type cb1_permissions {
+  id: Int!
+  name: name!
+  type: name!
+}
+
+"""
+aggregated selection of "cb1.permissions"
+"""
+type cb1_permissions_aggregate {
+  aggregate: cb1_permissions_aggregate_fields
+  nodes: [cb1_permissions!]!
+}
+
+"""
+aggregate fields of "cb1.permissions"
+"""
+type cb1_permissions_aggregate_fields {
+  avg: cb1_permissions_avg_fields
+  count(columns: [cb1_permissions_select_column!], distinct: Boolean): Int!
+  max: cb1_permissions_max_fields
+  min: cb1_permissions_min_fields
+  stddev: cb1_permissions_stddev_fields
+  stddev_pop: cb1_permissions_stddev_pop_fields
+  stddev_samp: cb1_permissions_stddev_samp_fields
+  sum: cb1_permissions_sum_fields
+  var_pop: cb1_permissions_var_pop_fields
+  var_samp: cb1_permissions_var_samp_fields
+  variance: cb1_permissions_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_permissions_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.permissions". All fields are combined with a logical 'AND'.
+"""
+input cb1_permissions_bool_exp {
+  _and: [cb1_permissions_bool_exp!]
+  _not: cb1_permissions_bool_exp
+  _or: [cb1_permissions_bool_exp!]
+  id: Int_comparison_exp
+  name: name_comparison_exp
+  type: name_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.permissions"
+"""
+enum cb1_permissions_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  permissions_pkey
+}
+
+"""
+columns and relationships of "cb1.permissions_for_product_by_email"
+"""
+type cb1_permissions_for_product_by_email {
+  email: String
+  name: name
+  product_reference: String
+  type: name
+}
+
+"""
+aggregated selection of "cb1.permissions_for_product_by_email"
+"""
+type cb1_permissions_for_product_by_email_aggregate {
+  aggregate: cb1_permissions_for_product_by_email_aggregate_fields
+  nodes: [cb1_permissions_for_product_by_email!]!
+}
+
+"""
+aggregate fields of "cb1.permissions_for_product_by_email"
+"""
+type cb1_permissions_for_product_by_email_aggregate_fields {
+  count(columns: [cb1_permissions_for_product_by_email_select_column!], distinct: Boolean): Int!
+  max: cb1_permissions_for_product_by_email_max_fields
+  min: cb1_permissions_for_product_by_email_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.permissions_for_product_by_email". All fields are combined with a logical 'AND'.
+"""
+input cb1_permissions_for_product_by_email_bool_exp {
+  _and: [cb1_permissions_for_product_by_email_bool_exp!]
+  _not: cb1_permissions_for_product_by_email_bool_exp
+  _or: [cb1_permissions_for_product_by_email_bool_exp!]
+  email: String_comparison_exp
+  name: name_comparison_exp
+  product_reference: String_comparison_exp
+  type: name_comparison_exp
+}
+
+"""aggregate max on columns"""
+type cb1_permissions_for_product_by_email_max_fields {
+  email: String
+  product_reference: String
+}
+
+"""aggregate min on columns"""
+type cb1_permissions_for_product_by_email_min_fields {
+  email: String
+  product_reference: String
+}
+
+"""
+Ordering options when selecting data from "cb1.permissions_for_product_by_email".
+"""
+input cb1_permissions_for_product_by_email_order_by {
+  email: order_by
+  name: order_by
+  product_reference: order_by
+  type: order_by
+}
+
+"""
+select columns of table "cb1.permissions_for_product_by_email"
+"""
+enum cb1_permissions_for_product_by_email_select_column {
+  """column name"""
+  email
+
+  """column name"""
+  name
+
+  """column name"""
+  product_reference
+
+  """column name"""
+  type
+}
+
+"""
+Streaming cursor of the table "cb1_permissions_for_product_by_email"
+"""
+input cb1_permissions_for_product_by_email_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_permissions_for_product_by_email_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_permissions_for_product_by_email_stream_cursor_value_input {
+  email: String
+  name: name
+  product_reference: String
+  type: name
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.permissions"
+"""
+input cb1_permissions_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "cb1.permissions"
+"""
+input cb1_permissions_insert_input {
+  id: Int
+  name: name
+  type: name
+}
+
+"""aggregate max on columns"""
+type cb1_permissions_max_fields {
+  id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_permissions_min_fields {
+  id: Int
+}
+
+"""
+response of any mutation on the table "cb1.permissions"
+"""
+type cb1_permissions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_permissions!]!
+}
+
+"""
+on_conflict condition type for table "cb1.permissions"
+"""
+input cb1_permissions_on_conflict {
+  constraint: cb1_permissions_constraint!
+  update_columns: [cb1_permissions_update_column!]! = []
+  where: cb1_permissions_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.permissions"."""
+input cb1_permissions_order_by {
+  id: order_by
+  name: order_by
+  type: order_by
+}
+
+"""primary key columns input for table: cb1.permissions"""
+input cb1_permissions_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.permissions"
+"""
+enum cb1_permissions_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  type
+}
+
+"""
+input type for updating data in table "cb1.permissions"
+"""
+input cb1_permissions_set_input {
+  id: Int
+  name: name
+  type: name
+}
+
+"""aggregate stddev on columns"""
+type cb1_permissions_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_permissions_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_permissions_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_permissions"
+"""
+input cb1_permissions_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_permissions_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_permissions_stream_cursor_value_input {
+  id: Int
+  name: name
+  type: name
+}
+
+"""aggregate sum on columns"""
+type cb1_permissions_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "cb1.permissions"
+"""
+enum cb1_permissions_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  type
+}
+
+input cb1_permissions_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_permissions_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_permissions_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_permissions_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_permissions_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_permissions_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_permissions_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "cb1.product"
+"""
+type cb1_product {
+  id: Int!
+  product_reference: String!
+  product_type: name!
+}
+
+"""
+columns and relationships of "cb1.product_access_permissions"
+"""
+type cb1_product_access_permissions {
+  category: name!
+  id: Int!
+  j_p_p_id: Int!
+  product_id: Int
+}
+
+"""
+aggregated selection of "cb1.product_access_permissions"
+"""
+type cb1_product_access_permissions_aggregate {
+  aggregate: cb1_product_access_permissions_aggregate_fields
+  nodes: [cb1_product_access_permissions!]!
+}
+
+"""
+aggregate fields of "cb1.product_access_permissions"
+"""
+type cb1_product_access_permissions_aggregate_fields {
+  avg: cb1_product_access_permissions_avg_fields
+  count(columns: [cb1_product_access_permissions_select_column!], distinct: Boolean): Int!
+  max: cb1_product_access_permissions_max_fields
+  min: cb1_product_access_permissions_min_fields
+  stddev: cb1_product_access_permissions_stddev_fields
+  stddev_pop: cb1_product_access_permissions_stddev_pop_fields
+  stddev_samp: cb1_product_access_permissions_stddev_samp_fields
+  sum: cb1_product_access_permissions_sum_fields
+  var_pop: cb1_product_access_permissions_var_pop_fields
+  var_samp: cb1_product_access_permissions_var_samp_fields
+  variance: cb1_product_access_permissions_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_product_access_permissions_avg_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.product_access_permissions". All fields are combined with a logical 'AND'.
+"""
+input cb1_product_access_permissions_bool_exp {
+  _and: [cb1_product_access_permissions_bool_exp!]
+  _not: cb1_product_access_permissions_bool_exp
+  _or: [cb1_product_access_permissions_bool_exp!]
+  category: name_comparison_exp
+  id: Int_comparison_exp
+  j_p_p_id: Int_comparison_exp
+  product_id: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.product_access_permissions"
+"""
+enum cb1_product_access_permissions_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  product_access_permissions_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.product_access_permissions"
+"""
+input cb1_product_access_permissions_inc_input {
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""
+input type for inserting data into table "cb1.product_access_permissions"
+"""
+input cb1_product_access_permissions_insert_input {
+  category: name
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""aggregate max on columns"""
+type cb1_product_access_permissions_max_fields {
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""aggregate min on columns"""
+type cb1_product_access_permissions_min_fields {
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""
+response of any mutation on the table "cb1.product_access_permissions"
+"""
+type cb1_product_access_permissions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_product_access_permissions!]!
+}
+
+"""
+on_conflict condition type for table "cb1.product_access_permissions"
+"""
+input cb1_product_access_permissions_on_conflict {
+  constraint: cb1_product_access_permissions_constraint!
+  update_columns: [cb1_product_access_permissions_update_column!]! = []
+  where: cb1_product_access_permissions_bool_exp
+}
+
+"""
+Ordering options when selecting data from "cb1.product_access_permissions".
+"""
+input cb1_product_access_permissions_order_by {
+  category: order_by
+  id: order_by
+  j_p_p_id: order_by
+  product_id: order_by
+}
+
+"""primary key columns input for table: cb1.product_access_permissions"""
+input cb1_product_access_permissions_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.product_access_permissions"
+"""
+enum cb1_product_access_permissions_select_column {
+  """column name"""
+  category
+
+  """column name"""
+  id
+
+  """column name"""
+  j_p_p_id
+
+  """column name"""
+  product_id
+}
+
+"""
+input type for updating data in table "cb1.product_access_permissions"
+"""
+input cb1_product_access_permissions_set_input {
+  category: name
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""aggregate stddev on columns"""
+type cb1_product_access_permissions_stddev_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_product_access_permissions_stddev_pop_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_product_access_permissions_stddev_samp_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_product_access_permissions"
+"""
+input cb1_product_access_permissions_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_product_access_permissions_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_product_access_permissions_stream_cursor_value_input {
+  category: name
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""aggregate sum on columns"""
+type cb1_product_access_permissions_sum_fields {
+  id: Int
+  j_p_p_id: Int
+  product_id: Int
+}
+
+"""
+update columns of table "cb1.product_access_permissions"
+"""
+enum cb1_product_access_permissions_update_column {
+  """column name"""
+  category
+
+  """column name"""
+  id
+
+  """column name"""
+  j_p_p_id
+
+  """column name"""
+  product_id
+}
+
+input cb1_product_access_permissions_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_product_access_permissions_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_product_access_permissions_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_product_access_permissions_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_product_access_permissions_var_pop_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_product_access_permissions_var_samp_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_product_access_permissions_variance_fields {
+  id: Float
+  j_p_p_id: Float
+  product_id: Float
+}
+
+"""
+aggregated selection of "cb1.product"
+"""
+type cb1_product_aggregate {
+  aggregate: cb1_product_aggregate_fields
+  nodes: [cb1_product!]!
+}
+
+"""
+aggregate fields of "cb1.product"
+"""
+type cb1_product_aggregate_fields {
+  avg: cb1_product_avg_fields
+  count(columns: [cb1_product_select_column!], distinct: Boolean): Int!
+  max: cb1_product_max_fields
+  min: cb1_product_min_fields
+  stddev: cb1_product_stddev_fields
+  stddev_pop: cb1_product_stddev_pop_fields
+  stddev_samp: cb1_product_stddev_samp_fields
+  sum: cb1_product_sum_fields
+  var_pop: cb1_product_var_pop_fields
+  var_samp: cb1_product_var_samp_fields
+  variance: cb1_product_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_product_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.product". All fields are combined with a logical 'AND'.
+"""
+input cb1_product_bool_exp {
+  _and: [cb1_product_bool_exp!]
+  _not: cb1_product_bool_exp
+  _or: [cb1_product_bool_exp!]
+  id: Int_comparison_exp
+  product_reference: String_comparison_exp
+  product_type: name_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "cb1.product"
+"""
+enum cb1_product_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  product_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "cb1.product"
+"""
+input cb1_product_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "cb1.product"
+"""
+input cb1_product_insert_input {
+  id: Int
+  product_reference: String
+  product_type: name
+}
+
+"""aggregate max on columns"""
+type cb1_product_max_fields {
+  id: Int
+  product_reference: String
+}
+
+"""aggregate min on columns"""
+type cb1_product_min_fields {
+  id: Int
+  product_reference: String
+}
+
+"""
+response of any mutation on the table "cb1.product"
+"""
+type cb1_product_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [cb1_product!]!
+}
+
+"""
+on_conflict condition type for table "cb1.product"
+"""
+input cb1_product_on_conflict {
+  constraint: cb1_product_constraint!
+  update_columns: [cb1_product_update_column!]! = []
+  where: cb1_product_bool_exp
+}
+
+"""Ordering options when selecting data from "cb1.product"."""
+input cb1_product_order_by {
+  id: order_by
+  product_reference: order_by
+  product_type: order_by
+}
+
+"""primary key columns input for table: cb1.product"""
+input cb1_product_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "cb1.product"
+"""
+enum cb1_product_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  product_reference
+
+  """column name"""
+  product_type
+}
+
+"""
+input type for updating data in table "cb1.product"
+"""
+input cb1_product_set_input {
+  id: Int
+  product_reference: String
+  product_type: name
+}
+
+"""aggregate stddev on columns"""
+type cb1_product_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_product_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_product_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_product"
+"""
+input cb1_product_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_product_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_product_stream_cursor_value_input {
+  id: Int
+  product_reference: String
+  product_type: name
+}
+
+"""aggregate sum on columns"""
+type cb1_product_sum_fields {
+  id: Int
+}
+
+"""
+update columns of table "cb1.product"
+"""
+enum cb1_product_update_column {
+  """column name"""
+  id
+
+  """column name"""
+  product_reference
+
+  """column name"""
+  product_type
+}
+
+input cb1_product_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: cb1_product_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: cb1_product_set_input
+
+  """filter the rows which have to be updated"""
+  where: cb1_product_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type cb1_product_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_product_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_product_variance_fields {
+  id: Float
+}
+
+"""
+columns and relationships of "cb1.products_for_email_id"
+"""
+type cb1_products_for_email_id {
+  email: String
+  id: Int
+  product_reference: String
+  product_type: name
+  type: name
+}
+
+"""
+aggregated selection of "cb1.products_for_email_id"
+"""
+type cb1_products_for_email_id_aggregate {
+  aggregate: cb1_products_for_email_id_aggregate_fields
+  nodes: [cb1_products_for_email_id!]!
+}
+
+"""
+aggregate fields of "cb1.products_for_email_id"
+"""
+type cb1_products_for_email_id_aggregate_fields {
+  avg: cb1_products_for_email_id_avg_fields
+  count(columns: [cb1_products_for_email_id_select_column!], distinct: Boolean): Int!
+  max: cb1_products_for_email_id_max_fields
+  min: cb1_products_for_email_id_min_fields
+  stddev: cb1_products_for_email_id_stddev_fields
+  stddev_pop: cb1_products_for_email_id_stddev_pop_fields
+  stddev_samp: cb1_products_for_email_id_stddev_samp_fields
+  sum: cb1_products_for_email_id_sum_fields
+  var_pop: cb1_products_for_email_id_var_pop_fields
+  var_samp: cb1_products_for_email_id_var_samp_fields
+  variance: cb1_products_for_email_id_variance_fields
+}
+
+"""aggregate avg on columns"""
+type cb1_products_for_email_id_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "cb1.products_for_email_id". All fields are combined with a logical 'AND'.
+"""
+input cb1_products_for_email_id_bool_exp {
+  _and: [cb1_products_for_email_id_bool_exp!]
+  _not: cb1_products_for_email_id_bool_exp
+  _or: [cb1_products_for_email_id_bool_exp!]
+  email: String_comparison_exp
+  id: Int_comparison_exp
+  product_reference: String_comparison_exp
+  product_type: name_comparison_exp
+  type: name_comparison_exp
+}
+
+"""aggregate max on columns"""
+type cb1_products_for_email_id_max_fields {
+  email: String
+  id: Int
+  product_reference: String
+}
+
+"""aggregate min on columns"""
+type cb1_products_for_email_id_min_fields {
+  email: String
+  id: Int
+  product_reference: String
+}
+
+"""Ordering options when selecting data from "cb1.products_for_email_id"."""
+input cb1_products_for_email_id_order_by {
+  email: order_by
+  id: order_by
+  product_reference: order_by
+  product_type: order_by
+  type: order_by
+}
+
+"""
+select columns of table "cb1.products_for_email_id"
+"""
+enum cb1_products_for_email_id_select_column {
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  product_reference
+
+  """column name"""
+  product_type
+
+  """column name"""
+  type
+}
+
+"""aggregate stddev on columns"""
+type cb1_products_for_email_id_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type cb1_products_for_email_id_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type cb1_products_for_email_id_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "cb1_products_for_email_id"
+"""
+input cb1_products_for_email_id_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: cb1_products_for_email_id_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input cb1_products_for_email_id_stream_cursor_value_input {
+  email: String
+  id: Int
+  product_reference: String
+  product_type: name
+  type: name
+}
+
+"""aggregate sum on columns"""
+type cb1_products_for_email_id_sum_fields {
+  id: Int
+}
+
+"""aggregate var_pop on columns"""
+type cb1_products_for_email_id_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type cb1_products_for_email_id_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type cb1_products_for_email_id_variance_fields {
+  id: Float
+}
+
+"""ordering argument of a cursor"""
+enum cursor_ordering {
+  """ascending ordering of the cursor"""
+  ASC
+
+  """descending ordering of the cursor"""
+  DESC
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "cb1.agreement"
+  """
+  delete_cb1_agreement(
+    """filter the rows which have to be deleted"""
+    where: cb1_agreement_bool_exp!
+  ): cb1_agreement_mutation_response
+
+  """
+  delete single row from the table: "cb1.agreement"
+  """
+  delete_cb1_agreement_by_pk(id: Int!): cb1_agreement
+
+  """
+  delete data from the table: "cb1.authorities"
+  """
+  delete_cb1_authorities(
+    """filter the rows which have to be deleted"""
+    where: cb1_authorities_bool_exp!
+  ): cb1_authorities_mutation_response
+
+  """
+  delete single row from the table: "cb1.authorities"
+  """
+  delete_cb1_authorities_by_pk(id: Int!): cb1_authorities
+
+  """
+  delete data from the table: "cb1.individual"
+  """
+  delete_cb1_individual(
+    """filter the rows which have to be deleted"""
+    where: cb1_individual_bool_exp!
+  ): cb1_individual_mutation_response
+
+  """
+  delete single row from the table: "cb1.individual"
+  """
+  delete_cb1_individual_by_pk(id: Int!): cb1_individual
+
+  """
+  delete data from the table: "cb1.join_product_permissions"
+  """
+  delete_cb1_join_product_permissions(
+    """filter the rows which have to be deleted"""
+    where: cb1_join_product_permissions_bool_exp!
+  ): cb1_join_product_permissions_mutation_response
+
+  """
+  delete single row from the table: "cb1.join_product_permissions"
+  """
+  delete_cb1_join_product_permissions_by_pk(id: Int!): cb1_join_product_permissions
+
+  """
+  delete data from the table: "cb1.party"
+  """
+  delete_cb1_party(
+    """filter the rows which have to be deleted"""
+    where: cb1_party_bool_exp!
+  ): cb1_party_mutation_response
+
+  """
+  delete single row from the table: "cb1.party"
+  """
+  delete_cb1_party_by_pk(id: Int!): cb1_party
+
+  """
+  delete data from the table: "cb1.permissions"
+  """
+  delete_cb1_permissions(
+    """filter the rows which have to be deleted"""
+    where: cb1_permissions_bool_exp!
+  ): cb1_permissions_mutation_response
+
+  """
+  delete single row from the table: "cb1.permissions"
+  """
+  delete_cb1_permissions_by_pk(id: Int!): cb1_permissions
+
+  """
+  delete data from the table: "cb1.product"
+  """
+  delete_cb1_product(
+    """filter the rows which have to be deleted"""
+    where: cb1_product_bool_exp!
+  ): cb1_product_mutation_response
+
+  """
+  delete data from the table: "cb1.product_access_permissions"
+  """
+  delete_cb1_product_access_permissions(
+    """filter the rows which have to be deleted"""
+    where: cb1_product_access_permissions_bool_exp!
+  ): cb1_product_access_permissions_mutation_response
+
+  """
+  delete single row from the table: "cb1.product_access_permissions"
+  """
+  delete_cb1_product_access_permissions_by_pk(id: Int!): cb1_product_access_permissions
+
+  """
+  delete single row from the table: "cb1.product"
+  """
+  delete_cb1_product_by_pk(id: Int!): cb1_product
+
+  """
+  insert data into the table: "cb1.agreement"
+  """
+  insert_cb1_agreement(
+    """the rows to be inserted"""
+    objects: [cb1_agreement_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_agreement_on_conflict
+  ): cb1_agreement_mutation_response
+
+  """
+  insert a single row into the table: "cb1.agreement"
+  """
+  insert_cb1_agreement_one(
+    """the row to be inserted"""
+    object: cb1_agreement_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_agreement_on_conflict
+  ): cb1_agreement
+
+  """
+  insert data into the table: "cb1.authorities"
+  """
+  insert_cb1_authorities(
+    """the rows to be inserted"""
+    objects: [cb1_authorities_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_authorities_on_conflict
+  ): cb1_authorities_mutation_response
+
+  """
+  insert a single row into the table: "cb1.authorities"
+  """
+  insert_cb1_authorities_one(
+    """the row to be inserted"""
+    object: cb1_authorities_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_authorities_on_conflict
+  ): cb1_authorities
+
+  """
+  insert data into the table: "cb1.individual"
+  """
+  insert_cb1_individual(
+    """the rows to be inserted"""
+    objects: [cb1_individual_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_individual_on_conflict
+  ): cb1_individual_mutation_response
+
+  """
+  insert a single row into the table: "cb1.individual"
+  """
+  insert_cb1_individual_one(
+    """the row to be inserted"""
+    object: cb1_individual_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_individual_on_conflict
+  ): cb1_individual
+
+  """
+  insert data into the table: "cb1.join_product_permissions"
+  """
+  insert_cb1_join_product_permissions(
+    """the rows to be inserted"""
+    objects: [cb1_join_product_permissions_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_join_product_permissions_on_conflict
+  ): cb1_join_product_permissions_mutation_response
+
+  """
+  insert a single row into the table: "cb1.join_product_permissions"
+  """
+  insert_cb1_join_product_permissions_one(
+    """the row to be inserted"""
+    object: cb1_join_product_permissions_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_join_product_permissions_on_conflict
+  ): cb1_join_product_permissions
+
+  """
+  insert data into the table: "cb1.party"
+  """
+  insert_cb1_party(
+    """the rows to be inserted"""
+    objects: [cb1_party_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_party_on_conflict
+  ): cb1_party_mutation_response
+
+  """
+  insert a single row into the table: "cb1.party"
+  """
+  insert_cb1_party_one(
+    """the row to be inserted"""
+    object: cb1_party_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_party_on_conflict
+  ): cb1_party
+
+  """
+  insert data into the table: "cb1.permissions"
+  """
+  insert_cb1_permissions(
+    """the rows to be inserted"""
+    objects: [cb1_permissions_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_permissions_on_conflict
+  ): cb1_permissions_mutation_response
+
+  """
+  insert a single row into the table: "cb1.permissions"
+  """
+  insert_cb1_permissions_one(
+    """the row to be inserted"""
+    object: cb1_permissions_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_permissions_on_conflict
+  ): cb1_permissions
+
+  """
+  insert data into the table: "cb1.product"
+  """
+  insert_cb1_product(
+    """the rows to be inserted"""
+    objects: [cb1_product_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_product_on_conflict
+  ): cb1_product_mutation_response
+
+  """
+  insert data into the table: "cb1.product_access_permissions"
+  """
+  insert_cb1_product_access_permissions(
+    """the rows to be inserted"""
+    objects: [cb1_product_access_permissions_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: cb1_product_access_permissions_on_conflict
+  ): cb1_product_access_permissions_mutation_response
+
+  """
+  insert a single row into the table: "cb1.product_access_permissions"
+  """
+  insert_cb1_product_access_permissions_one(
+    """the row to be inserted"""
+    object: cb1_product_access_permissions_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_product_access_permissions_on_conflict
+  ): cb1_product_access_permissions
+
+  """
+  insert a single row into the table: "cb1.product"
+  """
+  insert_cb1_product_one(
+    """the row to be inserted"""
+    object: cb1_product_insert_input!
+
+    """upsert condition"""
+    on_conflict: cb1_product_on_conflict
+  ): cb1_product
+
+  """
+  update data of the table: "cb1.agreement"
+  """
+  update_cb1_agreement(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_agreement_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_agreement_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_agreement_bool_exp!
+  ): cb1_agreement_mutation_response
+
+  """
+  update single row of the table: "cb1.agreement"
+  """
+  update_cb1_agreement_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_agreement_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_agreement_set_input
+    pk_columns: cb1_agreement_pk_columns_input!
+  ): cb1_agreement
+
+  """
+  update multiples rows of table: "cb1.agreement"
+  """
+  update_cb1_agreement_many(
+    """updates to execute, in order"""
+    updates: [cb1_agreement_updates!]!
+  ): [cb1_agreement_mutation_response]
+
+  """
+  update data of the table: "cb1.authorities"
+  """
+  update_cb1_authorities(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_authorities_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_authorities_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_authorities_bool_exp!
+  ): cb1_authorities_mutation_response
+
+  """
+  update single row of the table: "cb1.authorities"
+  """
+  update_cb1_authorities_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_authorities_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_authorities_set_input
+    pk_columns: cb1_authorities_pk_columns_input!
+  ): cb1_authorities
+
+  """
+  update multiples rows of table: "cb1.authorities"
+  """
+  update_cb1_authorities_many(
+    """updates to execute, in order"""
+    updates: [cb1_authorities_updates!]!
+  ): [cb1_authorities_mutation_response]
+
+  """
+  update data of the table: "cb1.individual"
+  """
+  update_cb1_individual(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_individual_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_individual_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_individual_bool_exp!
+  ): cb1_individual_mutation_response
+
+  """
+  update single row of the table: "cb1.individual"
+  """
+  update_cb1_individual_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_individual_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_individual_set_input
+    pk_columns: cb1_individual_pk_columns_input!
+  ): cb1_individual
+
+  """
+  update multiples rows of table: "cb1.individual"
+  """
+  update_cb1_individual_many(
+    """updates to execute, in order"""
+    updates: [cb1_individual_updates!]!
+  ): [cb1_individual_mutation_response]
+
+  """
+  update data of the table: "cb1.join_product_permissions"
+  """
+  update_cb1_join_product_permissions(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_join_product_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_join_product_permissions_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_join_product_permissions_bool_exp!
+  ): cb1_join_product_permissions_mutation_response
+
+  """
+  update single row of the table: "cb1.join_product_permissions"
+  """
+  update_cb1_join_product_permissions_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_join_product_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_join_product_permissions_set_input
+    pk_columns: cb1_join_product_permissions_pk_columns_input!
+  ): cb1_join_product_permissions
+
+  """
+  update multiples rows of table: "cb1.join_product_permissions"
+  """
+  update_cb1_join_product_permissions_many(
+    """updates to execute, in order"""
+    updates: [cb1_join_product_permissions_updates!]!
+  ): [cb1_join_product_permissions_mutation_response]
+
+  """
+  update data of the table: "cb1.party"
+  """
+  update_cb1_party(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_party_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_party_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_party_bool_exp!
+  ): cb1_party_mutation_response
+
+  """
+  update single row of the table: "cb1.party"
+  """
+  update_cb1_party_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_party_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_party_set_input
+    pk_columns: cb1_party_pk_columns_input!
+  ): cb1_party
+
+  """
+  update multiples rows of table: "cb1.party"
+  """
+  update_cb1_party_many(
+    """updates to execute, in order"""
+    updates: [cb1_party_updates!]!
+  ): [cb1_party_mutation_response]
+
+  """
+  update data of the table: "cb1.permissions"
+  """
+  update_cb1_permissions(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_permissions_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_permissions_bool_exp!
+  ): cb1_permissions_mutation_response
+
+  """
+  update single row of the table: "cb1.permissions"
+  """
+  update_cb1_permissions_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_permissions_set_input
+    pk_columns: cb1_permissions_pk_columns_input!
+  ): cb1_permissions
+
+  """
+  update multiples rows of table: "cb1.permissions"
+  """
+  update_cb1_permissions_many(
+    """updates to execute, in order"""
+    updates: [cb1_permissions_updates!]!
+  ): [cb1_permissions_mutation_response]
+
+  """
+  update data of the table: "cb1.product"
+  """
+  update_cb1_product(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_product_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_product_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_product_bool_exp!
+  ): cb1_product_mutation_response
+
+  """
+  update data of the table: "cb1.product_access_permissions"
+  """
+  update_cb1_product_access_permissions(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_product_access_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_product_access_permissions_set_input
+
+    """filter the rows which have to be updated"""
+    where: cb1_product_access_permissions_bool_exp!
+  ): cb1_product_access_permissions_mutation_response
+
+  """
+  update single row of the table: "cb1.product_access_permissions"
+  """
+  update_cb1_product_access_permissions_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_product_access_permissions_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_product_access_permissions_set_input
+    pk_columns: cb1_product_access_permissions_pk_columns_input!
+  ): cb1_product_access_permissions
+
+  """
+  update multiples rows of table: "cb1.product_access_permissions"
+  """
+  update_cb1_product_access_permissions_many(
+    """updates to execute, in order"""
+    updates: [cb1_product_access_permissions_updates!]!
+  ): [cb1_product_access_permissions_mutation_response]
+
+  """
+  update single row of the table: "cb1.product"
+  """
+  update_cb1_product_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cb1_product_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: cb1_product_set_input
+    pk_columns: cb1_product_pk_columns_input!
+  ): cb1_product
+
+  """
+  update multiples rows of table: "cb1.product"
+  """
+  update_cb1_product_many(
+    """updates to execute, in order"""
+    updates: [cb1_product_updates!]!
+  ): [cb1_product_mutation_response]
+}
+
+scalar name
+
+"""
+Boolean expression to compare columns of type "name". All fields are combined with logical 'AND'.
+"""
+input name_comparison_exp {
+  _eq: name
+  _gt: name
+  _gte: name
+  _in: [name!]
+  _is_null: Boolean
+  _lt: name
+  _lte: name
+  _neq: name
+  _nin: [name!]
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "cb1.agreement"
+  """
+  cb1_agreement(
+    """distinct select on columns"""
+    distinct_on: [cb1_agreement_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_agreement_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_agreement_bool_exp
+  ): [cb1_agreement!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.agreement"
+  """
+  cb1_agreement_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_agreement_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_agreement_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_agreement_bool_exp
+  ): cb1_agreement_aggregate!
+
+  """fetch data from the table: "cb1.agreement" using primary key columns"""
+  cb1_agreement_by_pk(id: Int!): cb1_agreement
+
+  """
+  fetch data from the table: "cb1.authorities"
+  """
+  cb1_authorities(
+    """distinct select on columns"""
+    distinct_on: [cb1_authorities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_authorities_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_authorities_bool_exp
+  ): [cb1_authorities!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.authorities"
+  """
+  cb1_authorities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_authorities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_authorities_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_authorities_bool_exp
+  ): cb1_authorities_aggregate!
+
+  """fetch data from the table: "cb1.authorities" using primary key columns"""
+  cb1_authorities_by_pk(id: Int!): cb1_authorities
+
+  """
+  fetch data from the table: "cb1.individual"
+  """
+  cb1_individual(
+    """distinct select on columns"""
+    distinct_on: [cb1_individual_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_individual_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_individual_bool_exp
+  ): [cb1_individual!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.individual"
+  """
+  cb1_individual_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_individual_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_individual_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_individual_bool_exp
+  ): cb1_individual_aggregate!
+
+  """fetch data from the table: "cb1.individual" using primary key columns"""
+  cb1_individual_by_pk(id: Int!): cb1_individual
+
+  """
+  fetch data from the table: "cb1.join_product_permissions"
+  """
+  cb1_join_product_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_join_product_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_join_product_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_join_product_permissions_bool_exp
+  ): [cb1_join_product_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.join_product_permissions"
+  """
+  cb1_join_product_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_join_product_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_join_product_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_join_product_permissions_bool_exp
+  ): cb1_join_product_permissions_aggregate!
+
+  """
+  fetch data from the table: "cb1.join_product_permissions" using primary key columns
+  """
+  cb1_join_product_permissions_by_pk(id: Int!): cb1_join_product_permissions
+
+  """
+  fetch data from the table: "cb1.party"
+  """
+  cb1_party(
+    """distinct select on columns"""
+    distinct_on: [cb1_party_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_party_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_party_bool_exp
+  ): [cb1_party!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.party"
+  """
+  cb1_party_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_party_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_party_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_party_bool_exp
+  ): cb1_party_aggregate!
+
+  """fetch data from the table: "cb1.party" using primary key columns"""
+  cb1_party_by_pk(id: Int!): cb1_party
+
+  """
+  fetch data from the table: "cb1.permissions"
+  """
+  cb1_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_bool_exp
+  ): [cb1_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.permissions"
+  """
+  cb1_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_bool_exp
+  ): cb1_permissions_aggregate!
+
+  """fetch data from the table: "cb1.permissions" using primary key columns"""
+  cb1_permissions_by_pk(id: Int!): cb1_permissions
+
+  """
+  fetch data from the table: "cb1.permissions_for_product_by_email"
+  """
+  cb1_permissions_for_product_by_email(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_for_product_by_email_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_for_product_by_email_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_for_product_by_email_bool_exp
+  ): [cb1_permissions_for_product_by_email!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.permissions_for_product_by_email"
+  """
+  cb1_permissions_for_product_by_email_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_for_product_by_email_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_for_product_by_email_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_for_product_by_email_bool_exp
+  ): cb1_permissions_for_product_by_email_aggregate!
+
+  """
+  fetch data from the table: "cb1.product"
+  """
+  cb1_product(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_bool_exp
+  ): [cb1_product!]!
+
+  """
+  fetch data from the table: "cb1.product_access_permissions"
+  """
+  cb1_product_access_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_access_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_access_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_access_permissions_bool_exp
+  ): [cb1_product_access_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.product_access_permissions"
+  """
+  cb1_product_access_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_access_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_access_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_access_permissions_bool_exp
+  ): cb1_product_access_permissions_aggregate!
+
+  """
+  fetch data from the table: "cb1.product_access_permissions" using primary key columns
+  """
+  cb1_product_access_permissions_by_pk(id: Int!): cb1_product_access_permissions
+
+  """
+  fetch aggregated fields from the table: "cb1.product"
+  """
+  cb1_product_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_bool_exp
+  ): cb1_product_aggregate!
+
+  """fetch data from the table: "cb1.product" using primary key columns"""
+  cb1_product_by_pk(id: Int!): cb1_product
+
+  """
+  fetch data from the table: "cb1.products_for_email_id"
+  """
+  cb1_products_for_email_id(
+    """distinct select on columns"""
+    distinct_on: [cb1_products_for_email_id_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_products_for_email_id_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_products_for_email_id_bool_exp
+  ): [cb1_products_for_email_id!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.products_for_email_id"
+  """
+  cb1_products_for_email_id_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_products_for_email_id_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_products_for_email_id_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_products_for_email_id_bool_exp
+  ): cb1_products_for_email_id_aggregate!
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "cb1.agreement"
+  """
+  cb1_agreement(
+    """distinct select on columns"""
+    distinct_on: [cb1_agreement_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_agreement_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_agreement_bool_exp
+  ): [cb1_agreement!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.agreement"
+  """
+  cb1_agreement_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_agreement_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_agreement_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_agreement_bool_exp
+  ): cb1_agreement_aggregate!
+
+  """fetch data from the table: "cb1.agreement" using primary key columns"""
+  cb1_agreement_by_pk(id: Int!): cb1_agreement
+
+  """
+  fetch data from the table in a streaming manner: "cb1.agreement"
+  """
+  cb1_agreement_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_agreement_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_agreement_bool_exp
+  ): [cb1_agreement!]!
+
+  """
+  fetch data from the table: "cb1.authorities"
+  """
+  cb1_authorities(
+    """distinct select on columns"""
+    distinct_on: [cb1_authorities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_authorities_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_authorities_bool_exp
+  ): [cb1_authorities!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.authorities"
+  """
+  cb1_authorities_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_authorities_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_authorities_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_authorities_bool_exp
+  ): cb1_authorities_aggregate!
+
+  """fetch data from the table: "cb1.authorities" using primary key columns"""
+  cb1_authorities_by_pk(id: Int!): cb1_authorities
+
+  """
+  fetch data from the table in a streaming manner: "cb1.authorities"
+  """
+  cb1_authorities_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_authorities_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_authorities_bool_exp
+  ): [cb1_authorities!]!
+
+  """
+  fetch data from the table: "cb1.individual"
+  """
+  cb1_individual(
+    """distinct select on columns"""
+    distinct_on: [cb1_individual_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_individual_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_individual_bool_exp
+  ): [cb1_individual!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.individual"
+  """
+  cb1_individual_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_individual_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_individual_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_individual_bool_exp
+  ): cb1_individual_aggregate!
+
+  """fetch data from the table: "cb1.individual" using primary key columns"""
+  cb1_individual_by_pk(id: Int!): cb1_individual
+
+  """
+  fetch data from the table in a streaming manner: "cb1.individual"
+  """
+  cb1_individual_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_individual_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_individual_bool_exp
+  ): [cb1_individual!]!
+
+  """
+  fetch data from the table: "cb1.join_product_permissions"
+  """
+  cb1_join_product_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_join_product_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_join_product_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_join_product_permissions_bool_exp
+  ): [cb1_join_product_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.join_product_permissions"
+  """
+  cb1_join_product_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_join_product_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_join_product_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_join_product_permissions_bool_exp
+  ): cb1_join_product_permissions_aggregate!
+
+  """
+  fetch data from the table: "cb1.join_product_permissions" using primary key columns
+  """
+  cb1_join_product_permissions_by_pk(id: Int!): cb1_join_product_permissions
+
+  """
+  fetch data from the table in a streaming manner: "cb1.join_product_permissions"
+  """
+  cb1_join_product_permissions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_join_product_permissions_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_join_product_permissions_bool_exp
+  ): [cb1_join_product_permissions!]!
+
+  """
+  fetch data from the table: "cb1.party"
+  """
+  cb1_party(
+    """distinct select on columns"""
+    distinct_on: [cb1_party_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_party_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_party_bool_exp
+  ): [cb1_party!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.party"
+  """
+  cb1_party_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_party_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_party_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_party_bool_exp
+  ): cb1_party_aggregate!
+
+  """fetch data from the table: "cb1.party" using primary key columns"""
+  cb1_party_by_pk(id: Int!): cb1_party
+
+  """
+  fetch data from the table in a streaming manner: "cb1.party"
+  """
+  cb1_party_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_party_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_party_bool_exp
+  ): [cb1_party!]!
+
+  """
+  fetch data from the table: "cb1.permissions"
+  """
+  cb1_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_bool_exp
+  ): [cb1_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.permissions"
+  """
+  cb1_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_bool_exp
+  ): cb1_permissions_aggregate!
+
+  """fetch data from the table: "cb1.permissions" using primary key columns"""
+  cb1_permissions_by_pk(id: Int!): cb1_permissions
+
+  """
+  fetch data from the table: "cb1.permissions_for_product_by_email"
+  """
+  cb1_permissions_for_product_by_email(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_for_product_by_email_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_for_product_by_email_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_for_product_by_email_bool_exp
+  ): [cb1_permissions_for_product_by_email!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.permissions_for_product_by_email"
+  """
+  cb1_permissions_for_product_by_email_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_permissions_for_product_by_email_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_permissions_for_product_by_email_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_permissions_for_product_by_email_bool_exp
+  ): cb1_permissions_for_product_by_email_aggregate!
+
+  """
+  fetch data from the table in a streaming manner: "cb1.permissions_for_product_by_email"
+  """
+  cb1_permissions_for_product_by_email_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_permissions_for_product_by_email_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_permissions_for_product_by_email_bool_exp
+  ): [cb1_permissions_for_product_by_email!]!
+
+  """
+  fetch data from the table in a streaming manner: "cb1.permissions"
+  """
+  cb1_permissions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_permissions_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_permissions_bool_exp
+  ): [cb1_permissions!]!
+
+  """
+  fetch data from the table: "cb1.product"
+  """
+  cb1_product(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_bool_exp
+  ): [cb1_product!]!
+
+  """
+  fetch data from the table: "cb1.product_access_permissions"
+  """
+  cb1_product_access_permissions(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_access_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_access_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_access_permissions_bool_exp
+  ): [cb1_product_access_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.product_access_permissions"
+  """
+  cb1_product_access_permissions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_access_permissions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_access_permissions_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_access_permissions_bool_exp
+  ): cb1_product_access_permissions_aggregate!
+
+  """
+  fetch data from the table: "cb1.product_access_permissions" using primary key columns
+  """
+  cb1_product_access_permissions_by_pk(id: Int!): cb1_product_access_permissions
+
+  """
+  fetch data from the table in a streaming manner: "cb1.product_access_permissions"
+  """
+  cb1_product_access_permissions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_product_access_permissions_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_product_access_permissions_bool_exp
+  ): [cb1_product_access_permissions!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.product"
+  """
+  cb1_product_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_product_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_product_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_product_bool_exp
+  ): cb1_product_aggregate!
+
+  """fetch data from the table: "cb1.product" using primary key columns"""
+  cb1_product_by_pk(id: Int!): cb1_product
+
+  """
+  fetch data from the table in a streaming manner: "cb1.product"
+  """
+  cb1_product_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_product_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_product_bool_exp
+  ): [cb1_product!]!
+
+  """
+  fetch data from the table: "cb1.products_for_email_id"
+  """
+  cb1_products_for_email_id(
+    """distinct select on columns"""
+    distinct_on: [cb1_products_for_email_id_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_products_for_email_id_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_products_for_email_id_bool_exp
+  ): [cb1_products_for_email_id!]!
+
+  """
+  fetch aggregated fields from the table: "cb1.products_for_email_id"
+  """
+  cb1_products_for_email_id_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cb1_products_for_email_id_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [cb1_products_for_email_id_order_by!]
+
+    """filter the rows returned"""
+    where: cb1_products_for_email_id_bool_exp
+  ): cb1_products_for_email_id_aggregate!
+
+  """
+  fetch data from the table in a streaming manner: "cb1.products_for_email_id"
+  """
+  cb1_products_for_email_id_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [cb1_products_for_email_id_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: cb1_products_for_email_id_bool_exp
+  ): [cb1_products_for_email_id!]!
+}
+
